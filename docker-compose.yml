@@ -28,3 +28,14 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+  extractor:
+    build:
+      context: ./services/extractor
+    container_name: extractor
+    restart: unless-stopped
+    volumes:
+      - /data:/data
+    ports:
+      - "8083:8080"
+    env_file:
+      - .env
